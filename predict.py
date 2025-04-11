@@ -19,7 +19,6 @@ SNAC_MODEL = "snac_24khz"
 SNAC_URL = (
     "https://weights.replicate.delivery/default/hubertsiuzdak/snac_24khz/model.tar"
 )
-model_path = ""
 
 
 def download_weights(url, dest):
@@ -190,10 +189,10 @@ class Predictor(BasePredictor):
         code_list = self.parse_output(generated_ids)
 
         # Convert to audio
-        audio_samples = self.redistribute_codes(code_list)
+        audio_sample = self.redistribute_codes(code_list)
 
         # Save the audio to a WAV file
         output_path = Path("/tmp/output.wav")
-        sf.write(output_path, audio_samples, 24000)
+        sf.write(output_path, audio_sample, 24000)
 
         return output_path
