@@ -76,6 +76,12 @@ class Predictor(BasePredictor):
             MODEL_NAME, torch_dtype=torch.bfloat16
         )
         self.model.to(self.device)
+
+        print("Loading tokenizer...")
+        snapshot_download(
+            repo_id=tokeniser_name,
+            token=HF_TOKEN,
+        )
         self.tokenizer = AutoTokenizer.from_pretrained(tokeniser_name)
         print(f"Models loaded successfully to {self.device}")
 
